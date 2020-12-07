@@ -31,20 +31,23 @@ const api = require('./routes/routes');
 app.use('/api/v1/', api);
 
 // This middleware informs the express application to serve our compiled React files
+console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
-    app.use(express.static(path.join(__dirname, 'client/build')));
+    console.log('made it here');
+    app.use(express.static(path.join(__dirname, '../client/build')));
 
     app.get('*', function (req, res) {
-        res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+        res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
     });
-};
+} else {
+    // Catch any bad requests
+    app.get('*', (req, res) => {
+        res.status(200).json({
+            msg: 'Catch All'
+        });
+    });
+}
 
-// Catch any bad requests
-app.get('*', (req, res) => {
-    res.status(200).json({
-        msg: 'Catch All'
-    });
-});
 
 // Configure our server to listen on the port defiend by our port variable
 app.listen(port, () => console.log(`BACK_END_SERVICE_PORT: ${port}`));
