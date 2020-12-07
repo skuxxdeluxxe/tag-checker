@@ -1,8 +1,7 @@
 const openTagRegex = /<[A-Z]>/g;
 const anyTagRegex = /<[A-Z]>|<\/[A-Z]>/g;
 
-const tagChecker = (body) => {
-    var paragraph = body.paragraph;
+const tagChecker = (paragraph) => {
     var tagMatches = paragraph.match(anyTagRegex);
 
     if(tagMatches === null) {
