@@ -7,5 +7,4 @@ const tagChecker = (req, res, next) => {
     });
 };
 
-module.exports.saySomething = saySomething;
 module.exports.tagChecker = tagChecker;
