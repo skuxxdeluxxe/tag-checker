@@ -5,6 +5,10 @@ const tagChecker = (body) => {
     var paragraph = body.paragraph;
     var tagMatches = paragraph.match(anyTagRegex);
 
+    if(tagMatches === null) {
+        return { result: true, message: 'Correctly tagged paragraph' };
+    }
+
     var stack = [];
     for (let i = 0; i < tagMatches.length; i++) {
         tagFound = tagMatches[i];
@@ -28,7 +32,7 @@ const tagChecker = (body) => {
         return { result: false, message: `Expected </${recentOpenTag.charAt(1)}> but found #` };
     }
 
-    return { result: true, message: 'Correctly tagged paragraph' }
+    return { result: true, message: 'Correctly tagged paragraph' };
 };
 
 module.exports.tagChecker = tagChecker;
